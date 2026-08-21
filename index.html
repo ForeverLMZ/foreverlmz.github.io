@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mingze Li (Leukos) — Computational Cognitive Neuroscience</title>
+<meta name="description" content="Mingze Li (publishing as Leukos) — PhD student at NYU studying attention, curiosity-driven exploration, and bio-inspired reinforcement learning.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,460;9..144,560;9..144,620&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <a class="mark" href="#top">Li<span>·</span>Leukos</a>
+  <ul>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="mailto:mingze.li@nyu.edu">Email</a></li>
+  </ul>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-canvas-holder" aria-hidden="true">
+    <canvas id="attn-grid"></canvas>
+  </div>
+  <div class="wrap hero-inner">
+    <p class="eyebrow">Center for Neural Science · New York University</p>
+    <h1>Mingze&nbsp;Li</h1>
+    <p class="pen-name">publishing as <em>Leukos</em> — previously Li, M.</p>
+    <p class="lede">
+      I study <strong>attention</strong> as the mechanism that turns a stream of
+      observations into a reason to keep exploring — in brains, and in the
+      reinforcement-learning agents built to model them.
+    </p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="mailto:mingze.li@nyu.edu">Email me</a>
+      <a class="btn btn-ghost" href="cv.pdf">Download CV</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="about wrap" id="about">
+    <div class="section-head">
+      <h2>About</h2>
+      <span class="eyebrow">Cognition &amp; Perception, NYU</span>
+    </div>
+    <p>
+      I'm a PhD student in the Cognition &amp; Perception program at NYU's
+      Center for Neural Science, advised by <strong>Grace W. Lindsay</strong>.
+      My work sits at the intersection of reinforcement learning, attention,
+      and curiosity: how does an agent — biological or artificial — decide
+      what's worth looking at, and how does that choice shape what it learns
+      next? I'm supported by the Henry M. MacCracken Fellowship and the
+      TPCN (Theoretical Principles in Cognition and Neuroscience) Fellowship.
+    </p>
+  </section>
+
+  <section id="research">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Research</h2>
+        <span class="eyebrow">Current lines</span>
+      </div>
+      <div class="research-grid">
+
+        <article class="card" data-hue="2">
+          <p class="tag">Attention · Exploration</p>
+          <h3>Curiosity-Driven Exploration &amp; Attention in Reinforcement Learning</h3>
+          <p class="dates">May 2026 — present</p>
+          <p>
+            Formalizing attention as a context-dependent observation-to-state
+            encoder, and studying how it drives hypothesis generation and
+            world-model learning under uncertainty. Built the
+            <strong>Color Cluster Escape Task</strong> (PsychoPy, with
+            integrated eye-tracking) and <strong>Quantum Rainbow</strong>, an
+            RL gridworld for multidimensional curiosity-driven exploration;
+            deployed a theory-based RL codebase (EMPA) on NYU's Greene HPC
+            cluster. Ongoing collaboration with Marcelo Mattar and Mark Ho.
+          </p>
+        </article>
+
+        <article class="card" data-hue="1">
+          <p class="tag">Attention · Value Learning</p>
+          <h3>Reward-Prediction-Error-Guided Feature Attention</h3>
+          <p class="dates">Sep 2024 — present</p>
+          <p>
+            A reinforcement-learning model in which feature-based attention
+            is dynamically modulated by reward prediction error, fit to
+            primate behavioral data to explain selective-attention learning
+            curves. Currently in revision at <em>Journal of Neuroscience</em>.
+          </p>
+          <p class="card-links">
+            <a href="https://www.biorxiv.org/content/10.1101/2026.04.10.717847">Preprint (bioRxiv)</a>
+          </p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="publications">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Publications</h2>
+        <span class="eyebrow">Selected</span>
+      </div>
+      <ul class="pub-list">
+        <li>
+          <span class="yr">2026</span>
+          <span class="cite">
+            <strong>Leukos, M.L.</strong>, Liang, A., &amp; Lindsay, G.W.
+            Modulation of feature attention by reward prediction error
+            explains value learning behavior.
+            <span class="venue">Journal of Neuroscience</span> (in revision).
+            <a href="https://www.biorxiv.org/content/10.1101/2026.04.10.717847">bioRxiv 2026.04.10.717847</a>
+          </span>
+        </li>
+        <li>
+          <span class="yr">2024</span>
+          <span class="cite">
+            Suárez, L.E., Mihalik, A., Milisav, F., Marshall, K.,
+            <strong>Li, M.</strong>, Vértes, P.E., Lajoie, G., &amp; Misic, B.
+            Connectome-based reservoir computing with the conn2res toolbox.
+            <span class="venue">Nature Communications</span>, 15, 656.
+            <a href="https://doi.org/10.1038/s41467-024-44900-4">doi:10.1038/s41467-024-44900-4</a>
+          </span>
+        </li>
+        <li>
+          <span class="yr">—</span>
+          <span class="cite">
+            Tugsbayar, M., <strong>Li, M.</strong>, Muller, E., &amp; Richards, B.
+            Top-down feedback matters: functional impact of brain-like
+            connectivity motifs on audiovisual integration.
+            <span class="venue">eLife</span> (Reviewed Preprint).
+            <a href="https://doi.org/10.7554/eLife.105953">doi:10.7554/eLife.105953</a>
+          </span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Education &amp; Fellowships</h2>
+        <span class="eyebrow">Timeline</span>
+      </div>
+      <div class="edu-grid">
+        <div>
+          <h3>Education</h3>
+          <div class="timeline-item">
+            <div class="role">Ph.D., Cognition &amp; Perception</div>
+            <div class="org">New York University — advised by Grace W. Lindsay</div>
+            <div class="when">Sept. 2024 — present</div>
+          </div>
+          <div class="timeline-item">
+            <div class="role">Honours B.A. &amp; Sc., Cognitive Science</div>
+            <div class="org">McGill University — Minor in Mathematics</div>
+            <div class="when">Sep. 2020 — May 2023</div>
+          </div>
+        </div>
+        <div>
+          <h3>Fellowships</h3>
+          <div class="timeline-item">
+            <div class="role">TPCN Fellowship</div>
+            <div class="org">Training Program in Computational Neuroscience</div>
+            <div class="when">2025</div>
+          </div>
+          <div class="timeline-item">
+            <div class="role">Henry M. MacCracken Fellowship</div>
+            <div class="org">New York University</div>
+            <div class="when">2024</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <span>&copy; <span id="year"></span> Mingze Li</span>
+  <span><a href="mailto:mingze.li@nyu.edu">mingze.li@nyu.edu</a> · <a href="cv.pdf">CV</a></span>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
