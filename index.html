@@ -8,7 +8,470 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400;1,8..60,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<style>
+/* ============================================================
+   Tokens
+   ============================================================ */
+:root {
+  --paper: #f7f6f2;
+  --paper-alt: #f1efe6;
+  --ink: #1d1d1b;
+  --ink-soft: #66645c;
+  --ink-faint: #8b8980;
+  --line: #dcd8cb;
+  --highlight: #e3b23c;
+  --highlight-soft: rgba(227, 178, 60, 0.28);
+  --link: #1e56a8;
+  --link-underline: rgba(30, 86, 168, 0.35);
+
+  --font-serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --font-sans: "IBM Plex Sans", -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --measure: 44rem;
+  --gutter: clamp(1.25rem, 5vw, 4rem);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 4.5rem; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation: none !important; transition: none !important; }
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-serif);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+  background-image: radial-gradient(var(--paper-alt) 1px, transparent 1px);
+  background-size: 3px 3px;
+}
+
+a {
+  color: var(--link);
+  text-decoration: none;
+  background-image: linear-gradient(var(--link-underline), var(--link-underline));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 100% 1.5px;
+  transition: background-size 0.2s ease, background-image 0.2s ease;
+  padding-bottom: 1px;
+}
+a:hover, a:focus-visible {
+  background-image: linear-gradient(var(--highlight), var(--highlight));
+  background-size: 100% 2px;
+}
+a:focus-visible {
+  outline: 2px solid var(--link);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+/* ============================================================
+   Top bar
+   ============================================================ */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1rem var(--gutter);
+  background: rgba(247, 246, 242, 0.86);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--line);
+}
+
+.wordmark {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--ink);
+  background: none;
+  padding-bottom: 0;
+  white-space: nowrap;
+}
+.wordmark:hover, .wordmark:focus-visible { background: none; color: var(--link); }
+
+.tabnav {
+  display: flex;
+  gap: 0.3rem;
+  margin: 0 auto 0 1.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+}
+.tab {
+  color: var(--ink-soft);
+  background: none;
+  padding: 0.4rem 0.7rem;
+  border-radius: 3px;
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+.tab:hover, .tab:focus-visible { color: var(--ink); background-color: var(--paper-alt); background-image: none; }
+.tab.is-active { color: var(--ink); background-color: var(--paper-alt); font-weight: 600; }
+
+.icon-links {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  flex-shrink: 0;
+}
+.icon-links a {
+  color: var(--ink-soft);
+  background: none;
+  padding: 0;
+  display: inline-flex;
+}
+.icon-links a:hover, .icon-links a:focus-visible { color: var(--highlight); background: none; }
+.icon { width: 18px; height: 18px; display: block; }
+
+/* ============================================================
+   Layout
+   ============================================================ */
+main { position: relative; z-index: 1; }
+section, .hero {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 4.5rem var(--gutter) 2rem;
+  scroll-margin-top: 4.5rem;
+}
+section + section, .hero + section {
+  border-top: 1px solid var(--line);
+  padding-top: 4rem;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin: 0 0 0.6rem;
+  position: relative;
+  display: inline-block;
+}
+.eyebrow::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  height: 2px;
+  width: 100%;
+  background: var(--highlight);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s ease;
+}
+.eyebrow.revealed::after { transform: scaleX(1); }
+
+h1 {
+  font-size: clamp(2.2rem, 5.5vw, 3rem);
+  font-weight: 500;
+  margin: 0 0 0.2rem;
+  letter-spacing: -0.01em;
+}
+h2 {
+  font-size: clamp(1.5rem, 3.5vw, 1.85rem);
+  font-weight: 500;
+  margin: 0 0 1.6rem;
+}
+.subtitle {
+  font-style: italic;
+  color: var(--ink-soft);
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+/* ---- Home / hero ---- */
+.hero-top {
+  display: flex;
+  align-items: center;
+  gap: 1.8rem;
+  margin-bottom: 1.6rem;
+}
+.photo-slot {
+  flex-shrink: 0;
+  width: 108px;
+  height: 108px;
+  border-radius: 50%;
+  border: 1px dashed var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--paper-alt);
+}
+.photo-slot span {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+img.photo-slot { object-fit: cover; object-position: 50% 30%; border-style: solid; }
+
+.bio { max-width: 40rem; }
+.bio + .bio { margin-top: 1rem; }
+
+mark.hl {
+  background: none;
+  color: inherit;
+  padding: 0 0.05em;
+  background-image: linear-gradient(var(--highlight-soft), var(--highlight-soft));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 100%;
+  transition: background-size 0.7s ease;
+}
+mark.hl.revealed { background-size: 100% 100%; }
+
+/* ============================================================
+   Projects + timeline
+   ============================================================ */
+.projects-layout {
+  display: grid;
+  grid-template-columns: 8.5rem minmax(0, 1fr);
+  gap: 2.4rem;
+  align-items: start;
+}
+
+.timeline {
+  position: sticky;
+  top: 5.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding-left: 1.1rem;
+  border-left: 3px solid var(--line);
+}
+.era-label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin: 1rem 0 0.25rem;
+  line-height: 1.4;
+}
+.era-label:first-child { margin-top: 0; }
+.year {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  background: none;
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  position: relative;
+  width: fit-content;
+}
+.year::before {
+  content: "";
+  position: absolute;
+  left: -1.55rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 2px solid var(--ink-faint);
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+.year:hover, .year:focus-visible { color: var(--ink); background-color: var(--paper-alt); background-image: none; }
+.year.is-active { color: var(--ink); background-color: var(--paper-alt); font-weight: 500; }
+.year.is-active::before { background: var(--highlight); border-color: var(--highlight); }
+
+.year-heading {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  color: var(--ink-faint);
+  font-weight: 500;
+  margin: 2.8rem 0 1.2rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px dashed var(--line);
+  scroll-margin-top: 5.5rem;
+}
+.year-heading:first-child { margin-top: 0; }
+
+.project { margin-bottom: 2.4rem; }
+.project-head { margin-bottom: 0.5rem; }
+.project h3 {
+  font-size: 1.08rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem;
+  line-height: 1.35;
+}
+.project .meta {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: var(--ink-soft);
+  margin: 0;
+}
+.project p:not(.meta):not(.project-links) { margin: 0.6rem 0 0; font-size: 0.97rem; }
+.project-links {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  margin-top: 0.6rem !important;
+}
+.dot { color: var(--ink-faint); margin: 0 0.5em; }
+
+.meta-inline {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  color: var(--ink-faint);
+  font-style: italic;
+}
+
+/* ============================================================
+   Publications
+   ============================================================ */
+.subsection-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  font-weight: 500;
+  margin: 0 0 1.2rem;
+}
+.pubs + .subsection-label { margin-top: 2.6rem; }
+
+.pubs { list-style: none; margin: 0; padding: 0; counter-reset: pub; }
+.pubs li {
+  counter-increment: pub;
+  position: relative;
+  padding-left: 2.1rem;
+  margin-bottom: 1.3rem;
+  font-size: 0.98rem;
+}
+.pubs li::before {
+  content: "[" counter(pub) "]";
+  position: absolute;
+  left: 0;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--ink-faint);
+}
+
+/* ============================================================
+   CV
+   ============================================================ */
+.cv-button {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.65rem 1.4rem;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  color: var(--ink);
+  background-color: var(--paper-alt);
+  background-image: none;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+}
+.cv-button:hover, .cv-button:focus-visible { border-color: var(--highlight); background-image: none; }
+
+/* ============================================================
+   Contact
+   ============================================================ */
+.contact-list {
+  list-style: none;
+  margin: 2rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.contact-list a, .contact-list .contact-static {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: none;
+  color: var(--ink);
+  height: 100%;
+}
+.contact-list a:hover, .contact-list a:focus-visible {
+  border-color: var(--highlight);
+  background-color: var(--paper-alt);
+  background-image: none;
+}
+.contact-list .icon { width: 22px; height: 22px; color: var(--ink-soft); flex-shrink: 0; }
+.contact-list strong {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+.contact-list em, .contact-list .contact-static em {
+  display: block;
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  margin-top: 0.15rem;
+  overflow-wrap: anywhere;
+}
+
+/* ============================================================
+   Footer
+   ============================================================ */
+footer {
+  text-align: center;
+  padding: 3rem var(--gutter) 4rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ink-faint);
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 720px) {
+  .topbar { flex-wrap: wrap; row-gap: 0.6rem; padding: 0.9rem 1.25rem; }
+  .tabnav { order: 3; width: 100%; margin: 0; overflow-x: auto; }
+  .icon-links { margin-left: auto; }
+  section, .hero { padding-left: 1.25rem; padding-right: 1.25rem; }
+  .hero-top { gap: 1.2rem; }
+  .photo-slot { width: 80px; height: 80px; }
+  .contact-list { grid-template-columns: 1fr; }
+
+  .projects-layout { display: block; }
+  .timeline {
+    position: sticky;
+    top: 3.4rem;
+    z-index: 5;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.2rem 0.5rem;
+    border-left: none;
+    border-bottom: 1px solid var(--line);
+    padding: 0.5rem 0;
+    margin-bottom: 1.6rem;
+    background: rgba(247, 246, 242, 0.92);
+    backdrop-filter: blur(6px);
+  }
+  .era-label { margin: 0 0.3rem 0 0; }
+  .year::before { display: none; }
+}
+</style>
 </head>
 <body>
 
@@ -47,11 +510,10 @@
   </nav>
 
   <div class="icon-links">
-    <a href="mailto:mingze.li@nyu.edu" aria-label="Email"><svg class="icon"><use href="#icon-mail"></use></svg></a>
-    <a href="https://www.linkedin.com/in/mingzeli0leukos/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg class="icon"><use href="#icon-linkedin"></use></svg></a>
-    <!-- TODO: replace with your actual GitHub profile URL -->
-    <a href="https://github.com/YOUR-USERNAME" target="_blank" rel="noopener" aria-label="GitHub"><svg class="icon"><use href="#icon-github"></use></svg></a>
-    <a href="https://scholar.google.com/citations?user=j1qvtl4AAAAJ&amp;hl=en" target="_blank" rel="noopener" aria-label="Google Scholar"><svg class="icon"><use href="#icon-scholar"></use></svg></a>
+    <a href="#contact" aria-label="Email — see contact section"><svg class="icon" width="18" height="18"><use href="#icon-mail"></use></svg></a>
+    <a href="https://www.linkedin.com/in/mingzeli0leukos/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg class="icon" width="18" height="18"><use href="#icon-linkedin"></use></svg></a>
+    <a href="https://github.com/ForeverLMZ" target="_blank" rel="noopener" aria-label="GitHub"><svg class="icon" width="18" height="18"><use href="#icon-github"></use></svg></a>
+    <a href="https://scholar.google.com/citations?user=j1qvtl4AAAAJ&amp;hl=en" target="_blank" rel="noopener" aria-label="Google Scholar"><svg class="icon" width="18" height="18"><use href="#icon-scholar"></use></svg></a>
   </div>
 </header>
 
@@ -60,11 +522,7 @@
   <!-- ============ HOME ============ -->
   <section class="hero" id="home">
     <div class="hero-top">
-      <!-- TODO: drop your headshot in as assets/photo.jpg (recommended: square, ~600x600px),
-           then replace this div with: <img class="photo-slot" src="assets/photo.jpg" alt="Mingze Li"> -->
-      <div class="photo-slot" aria-hidden="true">
-        <span>photo</span>
-      </div>
+      <img class="photo-slot" src="assets/photo.jpg" alt="Mingze Li">
       <div class="hero-text">
         <p class="eyebrow">About</p>
         <h1>Mingze Li</h1>
@@ -75,7 +533,8 @@
     <p class="bio">
       Hi, I'm Mingze! My Chinese name is 李铭泽. I'm a PhD student in the
       <a href="https://lindsay-lab.github.io/" target="_blank" rel="noopener">Lindsay Lab</a>
-      in the Department of Psychology at New York University, advised by Grace Lindsay.
+      in the Department of Psychology at New York University, advised by
+      <a href="https://as.nyu.edu/faculty/grace-lindsay.html" target="_blank" rel="noopener">Grace Lindsay</a>.
       Before NYU, I worked with
       <a href="https://linclab.mila.quebec/team/blake" target="_blank" rel="noopener">Blake Richards</a>
       in the <a href="https://linclab.mila.quebec/home" target="_blank" rel="noopener">LiNC Lab</a>
@@ -94,17 +553,6 @@
       world-model learning in novel environments. Here are the
       <a href="#projects">research projects</a> I've been working on.
     </p>
-
-    <div class="caption-grid">
-      <div>
-        <p class="caption-label">Fellowships</p>
-        <p class="caption-body">TPCN &middot; Henry M. MacCracken</p>
-      </div>
-      <div>
-        <p class="caption-label">Outside the lab</p>
-        <p class="caption-body">Krav Maga, exploration games (Outer&nbsp;Wilds), skiing, drawing, long-distance running</p>
-      </div>
-    </div>
   </section>
 
   <!-- ============ PROJECTS ============ -->
@@ -301,17 +749,17 @@
 
     <ul class="contact-list">
       <li>
-        <a href="mailto:mingze.li@nyu.edu">
-          <svg class="icon"><use href="#icon-mail"></use></svg>
+        <span class="contact-static">
+          <svg class="icon" width="22" height="22"><use href="#icon-mail"></use></svg>
           <span>
             <strong>Email</strong>
-            <em>mingze.li@nyu.edu</em>
+            <em>mingze [dot] li [at] nyu [dot] edu</em>
           </span>
-        </a>
+        </span>
       </li>
       <li>
         <a href="https://www.linkedin.com/in/mingzeli0leukos/" target="_blank" rel="noopener">
-          <svg class="icon"><use href="#icon-linkedin"></use></svg>
+          <svg class="icon" width="22" height="22"><use href="#icon-linkedin"></use></svg>
           <span>
             <strong>LinkedIn</strong>
             <em>mingzeli0leukos</em>
@@ -319,18 +767,17 @@
         </a>
       </li>
       <li>
-        <!-- TODO: replace with your actual GitHub profile URL -->
-        <a href="https://github.com/YOUR-USERNAME" target="_blank" rel="noopener">
-          <svg class="icon"><use href="#icon-github"></use></svg>
+        <a href="https://github.com/ForeverLMZ" target="_blank" rel="noopener">
+          <svg class="icon" width="22" height="22"><use href="#icon-github"></use></svg>
           <span>
             <strong>GitHub</strong>
-            <em>YOUR-USERNAME</em>
+            <em>ForeverLMZ</em>
           </span>
         </a>
       </li>
       <li>
         <a href="https://scholar.google.com/citations?user=j1qvtl4AAAAJ&amp;hl=en" target="_blank" rel="noopener">
-          <svg class="icon"><use href="#icon-scholar"></use></svg>
+          <svg class="icon" width="22" height="22"><use href="#icon-scholar"></use></svg>
           <span>
             <strong>Google Scholar</strong>
             <em>publications &amp; citations</em>
@@ -339,7 +786,7 @@
       </li>
       <li>
         <a href="https://bsky.app/profile/zleukos.bsky.social" target="_blank" rel="noopener">
-          <svg class="icon"><use href="#icon-bluesky"></use></svg>
+          <svg class="icon" width="22" height="22"><use href="#icon-bluesky"></use></svg>
           <span>
             <strong>Bluesky</strong>
             <em>@zleukos.bsky.social</em>
