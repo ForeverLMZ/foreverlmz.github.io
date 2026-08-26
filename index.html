@@ -4,85 +4,245 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mingze Li (Leukos)</title>
-<meta name="robots" content="noindex">
+<meta name="description" content="Mingze Li — PhD student in Computational Cognitive Neuroscience at NYU, publishing as Leukos.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,460;9..144,560;9..144,620&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #14151a;
-    --fg: #edebe4;
-    --fg-muted: #9799a6;
-    --fg-faint: #63656f;
-    --rule: #2a2c35;
-    --accent: #4fb286;
-    --font-display: "Fraunces", "Iowan Old Style", ui-serif, Georgia, serif;
-    --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
-  }
-  * { box-sizing: border-box; }
-  html, body {
-    height: 100%;
-    margin: 0;
-    background: var(--bg);
-    color: var(--fg);
-    font-family: var(--font-body);
-  }
-  body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1.5rem;
-  }
-  .card { max-width: 26rem; text-align: center; }
-  .eyebrow {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin: 0 0 1rem;
-  }
-  h1 {
-    font-family: var(--font-display);
-    font-weight: 560;
-    font-size: clamp(1.8rem, 5vw, 2.4rem);
-    margin: 0 0 0.4rem;
-    letter-spacing: -0.01em;
-  }
-  .pen { font-family: var(--font-mono); font-size: 0.8rem; color: var(--fg-muted); margin: 0 0 1.6rem; }
-  .pen em { color: var(--fg); font-style: italic; }
-  p.msg {
-    color: var(--fg-muted);
-    font-size: 1rem;
-    line-height: 1.6;
-    margin: 0 0 1.8rem;
-  }
-  .links {
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    display: flex;
-    gap: 1.2rem;
-    justify-content: center;
-    padding-top: 1.4rem;
-    border-top: 1px solid var(--rule);
-  }
-  a { color: var(--fg-muted); text-decoration: none; border-bottom: 1px solid var(--fg-faint); }
-  a:hover { color: var(--accent); border-bottom-color: var(--accent); }
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400;1,8..60,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="card">
-    <p class="eyebrow">Site under construction</p>
+
+<div class="grain" aria-hidden="true"></div>
+
+<header class="topbar">
+  <a class="wordmark" href="#top">ML</a>
+  <nav class="topbar-links" aria-label="Contact links">
+    <a href="mailto:mingze.li@nyu.edu">Email</a>
+    <span class="dot">·</span>
+    <a href="https://www.linkedin.com/in/mingzeli0leukos/" target="_blank" rel="noopener">LinkedIn</a>
+    <span class="dot">·</span>
+    <!-- TODO: replace with your actual GitHub profile URL -->
+    <a href="https://github.com/YOUR-USERNAME" target="_blank" rel="noopener">GitHub</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- ============ ABOUT ============ -->
+  <section class="hero" id="about">
+    <p class="eyebrow">About</p>
     <h1>Mingze Li</h1>
-    <p class="pen">publishing as <em>Leukos</em></p>
-    <p class="msg">
-      This page is being rebuilt. In the meantime, feel free to reach out
-      by email or take a look at my CV below.
+    <p class="subtitle">publishing as <em>Leukos</em></p>
+
+    <p class="bio">
+      I'm a PhD student in the Cognition &amp; Perception program at New York University,
+      advised by <a href="#" class="quiet-link">Grace Lindsay</a>. My research asks how
+      <mark class="hl">attention</mark> and curiosity shape learning &mdash; building
+      reinforcement learning models where feature-based attention is guided by reward
+      prediction error, and designing behavioral tasks to study how attention drives
+      exploration and hypothesis formation in novel environments. Before NYU, I worked
+      with Blake Richards at Mila and McGill University on connectome-informed
+      artificial neural networks.
     </p>
-    <div class="links">
-      <a href="mailto:mingze.li@nyu.edu">Email</a>
+
+    <nav class="section-nav" aria-label="Page sections">
+      <a href="#about">About</a>
+      <a href="#research">Research</a>
+      <a href="#publications">Publications</a>
+      <a href="#talks">Talks</a>
+      <a href="#cv">CV</a>
+    </nav>
+
+    <p class="interests">Fellowships: TPCN &middot; Henry M. MacCracken.</p>
+    <p class="interests">Outside the lab: Krav Maga, exploration games (Outer&nbsp;Wilds), skiing, drawing, long-distance running.</p>
+  </section>
+
+  <!-- ============ RESEARCH ============ -->
+  <section id="research">
+    <p class="eyebrow">Research</p>
+    <h2>Research Projects</h2>
+
+    <article class="project">
+      <div class="project-head">
+        <h3>Attention's Effect on Intrinsically Motivated Exploration in Human and Reinforcement Learning</h3>
+        <p class="meta">New York University &middot; May 2026 &ndash; Present</p>
+      </div>
+      <p>
+        Designing a novel behavioral task (PsychoPy, with eye-tracking) to measure how
+        feature-based attention drives human exploration and hypothesis formation in new
+        environments. Formalizing attention as a context-dependent observation-to-state
+        encoder for RL agents' world models, built on an adapted theory-based RL codebase
+        (EMPA).
+      </p>
+    </article>
+
+    <article class="project">
+      <div class="project-head">
+        <h3>Reward-Prediction-Error-Guided Feature Attention</h3>
+        <p class="meta">New York University &middot; Sep. 2024 &ndash; Present &middot; manuscript in revision at <em>Journal of Neuroscience</em></p>
+      </div>
+      <p>
+        A reinforcement learning model in which feature-based attention is dynamically
+        modulated by reward prediction error, fit to primate neural and behavioral data
+        in visual-attention tasks to explain how attention shapes decision-making and
+        value learning.
+      </p>
+    </article>
+
+    <article class="project">
+      <div class="project-head">
+        <h3>3D Unity-Integrated Platform for Reinforcement Learning and VR Training of Humans and Animals</h3>
+        <p class="meta">SilicoLabs, Toronto &middot; Sep. 2023 &ndash; Jan. 2024 &middot; advised by Blake Richards</p>
+      </div>
+      <p>
+        Built and trained reinforcement learning models in a Unity-based 3D task
+        environment; led the redesign of a cross-platform RL framework for
+        VR-enabled training across human, animal, and AI models in simulated
+        real-world environments.
+      </p>
+    </article>
+
+    <article class="project">
+      <div class="project-head">
+        <h3>Connectome-to-Model Toolbox: Bridging Brain Architecture &amp; Artificial Networks</h3>
+        <p class="meta">Mila &ndash; Quebec AI Institute &middot; Sep. 2022 &ndash; May 2024 &middot; published in <em>Nature Communications</em> (2024)</p>
+      </div>
+      <p>
+        Co-developed <strong>conn2res</strong>, an open-source Python toolbox that
+        transforms brain connectivity data into brain-inspired artificial neural
+        network architectures.
+      </p>
+      <p class="project-links">
+        <a href="https://github.com/netneurolab/conn2res" target="_blank" rel="noopener">Code</a>
+        <span class="dot">·</span>
+        <a href="https://www.nature.com/articles/s41467-024-44900-4" target="_blank" rel="noopener">Paper</a>
+      </p>
+    </article>
+
+    <div class="earlier-research">
+      <h3 class="earlier-label">Earlier Research</h3>
+      <ul class="earlier-list">
+        <li>
+          <h4>Animal Connectome Informed Reservoir Computing of Multiple Tasks <span class="meta-inline">honours thesis</span></h4>
+          <p class="meta">Montreal Neurological Institute &middot; Advisor: Bratislav Misic &middot; Sep. 2021 &ndash; Aug. 2023</p>
+          <p>
+            Built connectome-informed reservoir networks on five animal connectomes
+            (<em>C. elegans</em>, Drosophila, mouse, marmoset, macaque) and trained
+            them on 15 cognitive tasks from NeuroGym and Gym &mdash; the origin of
+            the conn2res toolbox above.
+          </p>
+        </li>
+        <li>
+          <h4>Comparative Analysis of Sulcal Patterns in the Lateral Occipital Cortex across Humans and Chimpanzees</h4>
+          <p class="meta">Montreal Neurological Institute &middot; Advisors: Michael Petrides &amp; Kep Kee Loh &middot; May 2022 &ndash; Dec. 2023</p>
+          <p>
+            Labeled vision-related sulci in fMRI data across primate species using
+            FreeSurfer and wrote Python analysis scripts to compare sulcal patterns
+            across species.
+          </p>
+        </li>
+        <li>
+          <h4>Macapype: Python-Based Pipelines for Multi-Modal Brain MRI Anatomical Data Analysis</h4>
+          <p class="meta">Institut des Neurosciences de la Timone, Marseille (remote) &middot; Advisors: David Meunier &amp; Kep Kee Loh &middot; Sep. 2022 &ndash; Apr. 2023</p>
+          <p>
+            Quality-checked marmoset fMRI segmentations generated by the Macapype
+            pipeline and corrected pipeline-generated T1 gray/white matter output
+            against the source images.
+          </p>
+        </li>
+        <li>
+          <h4>Decision Making with Brain-Inspired Recurrent Neural Networks</h4>
+          <p class="meta">IDG/McGovern Institute at Peking University &middot; Advisor: Zhou Yang &middot; May &ndash; Sep. 2021</p>
+          <p>
+            Co-programmed a bio-inspired RNN modeling decision-making in areas LIP
+            and FEF, and independently designed and ran human psychophysical
+            decision-making experiments with eye tracking (Psychtoolbox).
+          </p>
+        </li>
+      </ul>
     </div>
-  </div>
+  </section>
+
+  <!-- ============ PUBLICATIONS ============ -->
+  <section id="publications">
+    <p class="eyebrow">Publications</p>
+    <h2>Publications <a class="scholar-link" href="https://scholar.google.com/citations?user=j1qvtl4AAAAJ&amp;hl=en" target="_blank" rel="noopener" aria-label="Google Scholar profile">Google&nbsp;Scholar&nbsp;&#8599;</a></h2>
+
+    <ol class="pubs">
+      <li>
+        Leukos, M.L., Liang, A., &amp; Lindsay, G.W. Modulation of feature attention by
+        reward prediction error explains value learning behavior.
+        <em>Journal of Neuroscience</em> (in revision).
+        <a href="https://www.biorxiv.org/content/10.1101/2026.04.10.717847" target="_blank" rel="noopener">Preprint</a>.
+      </li>
+      <li>
+        Tugsbayar, M., Li, M., Muller, E.B., &amp; Richards, B. (2025).
+        <a href="https://elifesciences.org/reviewed-preprints/105953" target="_blank" rel="noopener">Top-down feedback matters: Functional impact of brainlike connectivity motifs on audiovisual integration.</a>
+        <em>eLife</em>.
+      </li>
+      <li>
+        Su&aacute;rez, L.E., Mihalik, A., Milisav, F., Marshall, K., Li, M., V&eacute;rtes, P.E.,
+        Lajoie, G., &amp; Misic, B. (2024).
+        <a href="https://www.nature.com/articles/s41467-024-44900-4" target="_blank" rel="noopener">Connectome-based reservoir computing with the conn2res toolbox.</a>
+        <em>Nature Communications</em>, 15.
+      </li>
+    </ol>
+  </section>
+
+  <!-- ============ TALKS ============ -->
+  <section id="talks">
+    <p class="eyebrow">Talks</p>
+    <h2>Talks &amp; Presentations</h2>
+
+    <ol class="pubs">
+      <li>
+        Leukos, M.L., &amp; Lindsay, G.W. &ldquo;Reward-Prediction-Error-Guided Attention
+        Explains Behavioral Learning Curves.&rdquo; 8th Annual Conference on Cognitive
+        Computational Neuroscience (CCN), Amsterdam, Netherlands, 2025.
+        <span class="meta-inline">accepted as poster and talk</span>
+      </li>
+      <li>
+        Su&aacute;rez, L.E., Li, M., Marshall, K., Mihalik, A., V&eacute;rtes, P.,
+        Lajoie, G., &amp; Mi&scaron;i&#263;, B. &ldquo;Conn2res: A Toolbox for
+        Connectome-Based Reservoir Computing.&rdquo; Organization of Human Brain
+        Mapping (OHBM), Glasgow, UK, 2022.
+      </li>
+    </ol>
+  </section>
+
+  <!-- ============ CV ============ -->
+  <section id="cv">
+    <p class="eyebrow">CV</p>
+    <h2>Curriculum Vitae</h2>
+    <p>Full CV with complete publication list, honors, and technical skills.</p>
+    <a class="cv-button" href="assets/mingze-li-cv.pdf" target="_blank" rel="noopener">Download CV (PDF)</a>
+  </section>
+
+</main>
+
+<footer>
+  <p>Mingze Li &middot; last updated August 2026</p>
+</footer>
+
+<script>
+  // Signature detail: quietly reveal the highlight mark and section
+  // eyebrows as they scroll into view. Respects reduced-motion.
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!prefersReducedMotion && 'IntersectionObserver' in window) {
+    const targets = document.querySelectorAll('.hl, .eyebrow');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.6 });
+    targets.forEach((t) => io.observe(t));
+  } else {
+    document.querySelectorAll('.hl, .eyebrow').forEach((t) => t.classList.add('revealed'));
+  }
+</script>
+
 </body>
 </html>
